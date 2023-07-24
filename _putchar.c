@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include <unistd.h>
 #include "main.h"
 /**
  * _putchar - Custom function to print a single character to stdout
