@@ -1,23 +1,56 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdarg.h>
 #include "main.h"
 /**
- * _printf - function my printf
- * @format: string whit format to print
+ * _printf - Custom print function based on the format string
+ * @format: The format string containing conversion specifiers
  *
- * Return: number of chars that print
+ * Return: The number of characters printed (excluding the null byte used to end output to strings)
  */
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int length = 0;
-
-	if (format == NULL)
-		return (-1);
-
 	va_start(args, format);
-
-	length = _print_format(format, args);
+	
+	int printed_chars = 0;
+	
+	while (*format)
+	{
+		if (*format != '%')
+		{
+			putchar(*format);
+			printed_chars++;
+		}
+		else
+		{
+			format++;
+			switch (*format)
+			{
+				case 'c':
+					putchar(va_arg(args, int));
+					printed_chars++;
+					break;
+				case 's':
+					{
+						const char *str = va_arg(args, const char *);
+						while (*str)
+						{
+							putchar(*str);
+							str++;
+							printed_chars++;
+						}
+						break;
+					}
+				case '%':
+					putchar('%');
+					printed_chars++;
+					break;
+				default:
+					break;
+			}
+		}
+		format++;
+	}
 	va_end(args);
-	return (length);
+	return printed_chars;
 }
