@@ -19,7 +19,7 @@ void print_char(va_list args, int *printed_chars)
  * @args: The arguement list
  * @printed chars: pointer to the number of char
  */
-void print_string(va_list args, int *printe_ chars)
+void print_string(va_list args, int *printed_chars)
 {
 	const char *str = va_arg(args, const char *);
 
@@ -49,7 +49,7 @@ void print_integer(va_list args, int *printed_char)
 		(*printed_char)++;
 		num = -num;
 	}
-	while (tem > 9)
+	while (temp > 9)
 	{
 		temp /= 10;
 		divisor *= 10;
@@ -57,7 +57,7 @@ void print_integer(va_list args, int *printed_char)
 	while (divisor > 0)
 	{
 		_putchar('0' + digit);
-		(*printed_chars)++;
+		(*printed_char)++;
 		num %= divisor;
 		divisor /= 10;
 	}
@@ -83,7 +83,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			format++
+			format++;
 			switch (*format)
 			{
 				case 'c':
