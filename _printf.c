@@ -5,14 +5,13 @@
  * _printf - Custom print function based on the format string
  * @format: The format string containing conversion specifiers
  *
- * Return: The number of characters printed (excluding the null byte used to end output to strings)
+ * Return: The number of characters printed
  */
 int _printf(const char *format, ...)
 {
 	int printed_chars = 0;
 	va_list args;
 	va_start(args, format);
-	
 	while (*format)
 	{
 		if (*format != '%')
@@ -51,5 +50,5 @@ int _printf(const char *format, ...)
 		format++;
 	}
 	va_end(args);
-	return printed_chars;
+	return (printed_chars);
 }
