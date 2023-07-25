@@ -9,6 +9,7 @@
 void print_char(va_list args, int *printed_chars)
 {
 	char c = va_arg(args, int);
+
 	_putchar(c);
 	(*printed_chars)++;
 }
@@ -21,6 +22,7 @@ void print_char(va_list args, int *printed_chars)
 void print_string(va_list args, int *printe_ chars)
 {
 	const char *str = va_arg(args, const char *);
+
 	while (*str)
 	{
 		_putchar(*str);
@@ -40,6 +42,7 @@ void print_integer(va_list args, int *printed_char)
 	int divisor = 1;
 	int temp = num;
 	int digit = num / divisor;
+
 	if (num < 0)
 	{
 		_putchar('-');
@@ -55,7 +58,7 @@ void print_integer(va_list args, int *printed_char)
 	{
 		_putchar('0' + digit);
 		(*printed_chars)++;
-		num %+ divisor;
+		num %= divisor;
 		divisor /= 10;
 	}
 }
