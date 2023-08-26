@@ -2,53 +2,50 @@
 #include <stdarg.h>
 #include "main.h"
 /**
- * _printf - Custom print function based on the format string
- * @format: The format string containing conversion specifiers
+ * _printf - produces output according to a format
+ * @format: a character string composed of zero or more directives
  *
- * Return: The number of characters printed
+ * Return: the number of characters printed (excluding the null byte)
  */
 int _printf(const char *format, ...)
 {
-	int printed_chars = 0;
-	va_list args;
-	va_start(args, format);
-	while (*format)
-	{
-		if (*format != '%')
-		{
-			putchar(*format);
-			printed_chars++;
-		}
-		else
-		{
-			format++;
-			switch (*format)
-			{
-				case 'c':
-					putchar(va_arg(args, int));
-					printed_chars++;
-					break;
-				case 's':
-					{
-						const char *str = va_arg(args, const char *);
-						while (*str)
-						{
-							putchar(*str);
-							str++;
-							printed_chars++;
-						}
-						break;
-					}
-				case '%':
-					putchar('%');
-					printed_chars++;
-					break;
-				default:
-					break;
-			}
-		}
-		format++;
-	}
-	va_end(args);
-	return (printed_chars);
+    va_list args;
+    int i = 0;
+    int count = 0;
+
+    va_start(args, format);
+    while (format && format[i])
+    {
+        if (format[i] == '%')
+        {
+            i++;
+            switch (format[i])
+            {
+                case 'c':
+                    count += _putchar(va_arg(args, int));
+                    break;
+                case 's':
+                    count += print_string(va_arg(args, char *));
+                    break;
+                case '%':
+                    count += _putchar('%');
+                    break;
+                case 'd':
+                case 'i':
+                    count += print_int(va_arg(args, int));
+                    break;
+                default:
+                    count += _putchar('%');
+                    count += _putchar(format[i]);
+                    break;
+            }
+        }
+        else
+        {
+            count += _putchar(format[i]);
+        }
+        i++;
+    }
+    va_end(args);
+    return (count);
 }
