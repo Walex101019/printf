@@ -56,6 +56,13 @@ int _printf(const char *format, ...)
 						count += get_num_length(num);
 						break;
 					}
+				case 'b':
+					{
+						unsigned int num = va_arg(args, unsigned int);
+						print_binary(num);
+					       	count += 32;
+						break;
+					}
 				case '%':
 					_putchar('%');
 					count++;
